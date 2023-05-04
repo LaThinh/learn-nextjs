@@ -12,20 +12,19 @@ export interface PostListPageProps {
 export default function PostListPage({ posts }: PostListPageProps) {
   const router = useRouter();
   //const query = router.query;
-  console.log("Post List query: ", router.query);
+  //console.log("Post List query: ", router.query);
 
   const [postList, setPostList] = React.useState([]);
   const page = Number(router.query?.page) || 1;
 
   React.useEffect(() => {
     (async () => {
-      const response = await fetch(`https://js-post-api.herokuapp.com/api/posts?_page=${page}`);
+      const urlPostList = `https://js-post-api.herokuapp.com/api/posts?_page=${page}`;
+      const response = await fetch(urlPostList);
       const data = await response.json();
 
+      console.log("Fetch Data from url : " + urlPostList);
       setPostList(data.data);
-
-      console.log("Post List after async");
-
       console.log(postList);
     })();
   }, [page]);
@@ -77,11 +76,15 @@ export default function PostListPage({ posts }: PostListPageProps) {
           {postList.map((post: any) => (
             <li key={post?.id} className="post w-200 h-100 p-2 border-1 border-gray-200 rounded-lg">
               <h3 className="post-title text-xl font-bold">{post.title}</h3>
-              <p>{post.author}</p>
+              <p className="flex justify-between">
+                <span className="post-author">{post.author}</span>
+                <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+              </p>
+
               <img
-                className="block w-80 h-40 rounded-lg cursor-pointer hover:opacity-70"
+                className=" w-80 h-40 flex text-center rounded-lg cursor-pointer hover:opacity-70"
                 src={post.imageUrl ? post.imageUrl : "no-image"}
-                alt=""
+                alt={post.imageUrl}
               />
             </li>
           ))}

@@ -4,8 +4,7 @@ import * as React from "react";
 export interface IHeaderProps {}
 
 export default function Header(props: IHeaderProps) {
-  console.log("Render Header");
-
+  //console.log("Render Header");
   return (
     <header className="flex flex-col items-center">
       <ul className="menu flex m-4">
