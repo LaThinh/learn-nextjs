@@ -1,8 +1,49 @@
 body {
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 
 h1 {
   margin: 10px auto 20px;
   font-size: 2em;
+}
+
+.menu li {
+  margin: 0 10px;
+}
+
+.post-list .post {
+  background-color: white;
+}
+
+.post-list p {
+  font-size: 14px;
+}
+
+.post-list .post img {
+  margin-top: 10px;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+
+.post-list .post .post-title {
+  height: 40px;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+.page button {
+  margin: 10px 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  line-height: 20px;
+  height: 50px;
+  border-radius: 10px;
+  color: black;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+}
+
+.page button:hover {
+  color: white;
+  background-color: #275ba0;
 }

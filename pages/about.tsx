@@ -1,15 +1,34 @@
-import * as React from 'react';
+import * as React from "react";
 import Link from "next/link";
 
-export interface IAboutPageProps {
-}
+import { useRouter } from "next/router";
+import Head from "next/head";
+//import Header from "@/components/common/header";
+import dynamic from "next/dynamic";
 
-export default function AboutPage (props: IAboutPageProps) {
+const Header = dynamic(() => import("@/components/common/header"), {
+  ssr: false,
+  loading: () => <p>Loading header ...</p>,
+});
+
+export interface IAboutPageProps {}
+
+export default function AboutPage(props: IAboutPageProps) {
+  const router = useRouter();
+  console.log("About query: ", router.query);
+
   return (
-    <div className="flex flex-col items-center">
-      <h1>Title H1 Demo</h1>
+    <>
+      <Head>
+        <title>About page | Paul La</title>
+      </Head>
+      <Header />
+      <h1>This is about page</h1>
       <br />
-        <Link href="https://facebook.com/lathinh" target="_blank">Facebook</Link>
-    </div>
+      <p>Hi My name is Paul La</p>
+      <Link href="https://facebook.com/lathinh" target="_blank">
+        This is Facebook Link
+      </Link>
+    </>
   );
 }
