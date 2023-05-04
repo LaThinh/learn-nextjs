@@ -12,12 +12,14 @@ export interface PostListPageProps {
 export default function PostListPage({ posts }: PostListPageProps) {
   const router = useRouter();
   //const query = router.query;
-  //console.log("Post List query: ", router.query);
+  console.log("Post List query: ", router.query);
 
   const [postList, setPostList] = React.useState([]);
   const page = Number(router.query?.page) || 1;
 
   React.useEffect(() => {
+    if (!page) return;
+
     (async () => {
       const urlPostList = `https://js-post-api.herokuapp.com/api/posts?_page=${page}`;
       const response = await fetch(urlPostList);
@@ -72,7 +74,7 @@ export default function PostListPage({ posts }: PostListPageProps) {
           </div>
         </div>
 
-        <ul className="grid grid-cols-3 gap-6 post-list w-full max-w-screen-xl ">
+        <ul className="grid grid-cols-4 gap-6 post-list w-full max-w-screen-xl ">
           {postList.map((post: any) => (
             <li key={post?.id} className="post w-200 h-100 p-2 border-1 border-gray-200 rounded-lg">
               <h3 className="post-title text-xl font-bold">{post.title}</h3>
@@ -81,11 +83,13 @@ export default function PostListPage({ posts }: PostListPageProps) {
                 <span>{new Date(post.createdAt).toLocaleDateString()}</span>
               </p>
 
-              <img
-                className=" w-80 h-40 flex text-center rounded-lg cursor-pointer hover:opacity-70"
-                src={post.imageUrl ? post.imageUrl : "no-image"}
-                alt={post.imageUrl}
-              />
+              <Link href={`posts/${post?.id}`}>
+                <img
+                  className=" w-80 h-40 flex text-center rounded-lg cursor-pointer hover:opacity-70"
+                  src={post.imageUrl ? post.imageUrl : "no-image"}
+                  alt={post.imageUrl}
+                />
+              </Link>
             </li>
           ))}
         </ul>
