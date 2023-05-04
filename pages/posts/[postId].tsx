@@ -6,10 +6,19 @@ import * as React from "react";
 
 export interface PostDetailPageProps {}
 
+export interface PostType {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+  createdAt: string;
+  author: string;
+}
+
 export default function PostDetailPage(props: PostDetailPageProps) {
   const router = useRouter();
 
-  const [post, setPost] = React.useState({});
+  const [post, setPost] = React.useState<PostType | undefined>(undefined);
   const postId = router.query?.postId || null;
 
   React.useEffect(() => {
@@ -31,24 +40,24 @@ export default function PostDetailPage(props: PostDetailPageProps) {
           className="post-detail flex flex-col justify-center 
         mx-auto p-5 bg-white rounded-xl max-w-screen-xl"
         >
-          <h1 className="post-title font-bold">Post Detail {post.title}</h1>
+          <h1 className="post-title font-bold">Post Detail {post?.title}</h1>
           <p className="flex justify-between">
             <Link href="../posts" className="text-blue-500 hover:text-blue-700">
               Back to Post List
             </Link>
-            <span className="post-author">{post.author}</span>
-            <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+            <span className="post-author">{post?.author}</span>
+            <span>{post?.createdAt}</span>
           </p>
 
           <p className="my-5">Query: {JSON.stringify(router.query)}</p>
           <Link href={`posts/${post?.id}`}>
             <img
               className=" rounded-lg"
-              src={post.imageUrl ? post.imageUrl : "no-image"}
-              alt={post.imageUrl}
+              src={post?.imageUrl ? post?.imageUrl : "no-image"}
+              alt={post?.imageUrl}
             />
           </Link>
-          <div className="post-desc my-5 text-xl capitalize ">{post.description}</div>
+          <div className="post-desc my-5 text-xl capitalize ">{post?.description}</div>
         </div>
       </div>
     </>
