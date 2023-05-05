@@ -4,7 +4,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
-import Layout from "./../../../../../Project/OutSource/nature/wp-content/plugins/elementor/app/modules/onboarding/assets/js/components/layout/layout";
 import { AdminLayout, MainLayout } from "@/components/layout";
 
 export interface PostListPageProps {
