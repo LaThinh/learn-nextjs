@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
 import Header from "@/components/common/header";
+import { MainLayout } from "@/components/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +13,6 @@ export default function Home() {
       <Head>
         <title>Welcome to NextJs | Paul La</title>
       </Head>
-      <Header />
 
       <main
         className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -136,3 +136,5 @@ export default function Home() {
     </div>
   );
 }
+
+Home.Layout = MainLayout;

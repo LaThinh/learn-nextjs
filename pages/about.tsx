@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 //import Header from "@/components/common/header";
 import dynamic from "next/dynamic";
+import { MainLayout, AdminLayout } from "@/components/layout";
 
 const Header = dynamic(() => import("@/components/common/header"), {
   ssr: false,
@@ -22,13 +23,16 @@ export default function AboutPage(props: IAboutPageProps) {
       <Head>
         <title>About page | Paul La</title>
       </Head>
-      <Header />
-      <h1>This is about page</h1>
-      <br />
-      <p>Hi My name is Paul La</p>
-      <Link href="https://facebook.com/lathinh" target="_blank">
-        This is Facebook Link
-      </Link>
+      <div>
+        <h1>This is about page</h1>
+        <br />
+        <p>Hi My name is Paul La</p>
+        <Link href="https://facebook.com/lathinh" target="_blank">
+          This is Facebook Link
+        </Link>
+      </div>
     </>
   );
 }
+
+AboutPage.Layout = AdminLayout;

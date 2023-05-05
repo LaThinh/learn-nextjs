@@ -1,10 +1,13 @@
 import Header from "@/components/common/header";
+import { AdminLayout } from "@/components/layout";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 
-export interface PostDetailPageProps {}
+export interface PostPageProps {
+  post: any;
+}
 
 export interface PostType {
   id: number;
@@ -15,26 +18,42 @@ export interface PostType {
   author: string;
 }
 
-export default function PostDetailPage(props: PostDetailPageProps) {
+PostDetailPage.Layout = AdminLayout;
+
+export default function PostDetailPage({ post }: PostPageProps) {
   const router = useRouter();
 
-  const [post, setPost] = React.useState<PostType | undefined>(undefined);
-  const postId = router.query?.postId || null;
+  if (router.isFallback) {
+    return (
+      <div className="post-detail-page w-full px-10">
+        <div
+          className="post-detail flex flex-col justify-center 
+        mx-auto p-5 bg-white rounded-xl max-w-screen-xl"
+        >
+          <h2>Loading ...</h2>
+        </div>
+      </div>
+    );
+  }
 
-  React.useEffect(() => {
-    if (!postId) return;
+  // const [post, setPost] = React.useState<PostType | undefined>(undefined);
+  // const postId = router.query?.postId || null;
 
-    console.log("PostId : " + postId);
-    (async () => {
-      const response = await fetch(`https://js-post-api.herokuapp.com/api/posts/${postId}`);
-      const data = await response.json();
-      setPost(data);
-    })();
-  }, [postId]);
+  // React.useEffect(() => {
+  //   if (!postId) return;
+
+  //   console.log("PostId : " + postId);
+  //   (async () => {
+  //     const response = await fetch(`https://js-post-api.herokuapp.com/api/posts/${postId}`);
+  //     const data = await response.json();
+  //     setPost(data);
+  //   })();
+  // }, [postId]);
+
+  if (!post) return null;
 
   return (
     <>
-      <Header />
       <div className="post-detail-page w-full px-10">
         <div
           className="post-detail flex flex-col justify-center 
@@ -64,39 +83,40 @@ export default function PostDetailPage(props: PostDetailPageProps) {
   );
 }
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   console.log("Get Statics Path");
+export const getStaticPaths: GetStaticPaths = async () => {
+  console.log("Get Statics Path");
 
-//   // const postId = router.query;
-//   // const response = await fetch(`https://js-post-api.herokuapp.com/api/posts/${postId}`);
-//   // const data = await response.json();
+  // const postId = router.query;
+  const response = await fetch(`https://js-post-api.herokuapp.com/api/posts?_page=1`);
+  const data = await response.json();
 
-//   // return {
-//   //   paths: data.data.map((post: any) => ({ params: { postId: post.id } })),
-//   //   fallback: false,
-//   // };
-//   return {
-//     paths: [],
-//     fallback: false,
-//   };
-// };
+  return {
+    paths: data.data.map((post: any) => ({ params: { postId: post.id } })),
+    fallback: true,
+  };
+  // return {
+  //   paths: [],
+  //   fallback: false,
+  // };
+};
 
-// export const getStaticProps: GetStaticProps<PostDetailPageProps> = async (
-//   context: GetStaticPropsContext
-// ) => {
-//   // server side
-//   // build time
-//   const postId = context.params?.postId;
-//   console.log("Get Static props Post Detail from server", context.params?.postId);
+export const getStaticProps: GetStaticProps<PostPageProps> = async (
+  context: GetStaticPropsContext
+) => {
+  // server side
+  // build time
+  console.log("Get Static props Post Detail from server", context.params?.postId);
+  const postId = context.params?.postId;
 
-//   const response = await fetch(`https://js-post-api.herokuapp.com/api/posts/${postId}`);
-//   const data = await response.json();
+  if (!postId) return { notFound: true };
 
-//   console.log(data);
+  const response = await fetch(`https://js-post-api.herokuapp.com/api/posts/${postId}`);
+  const data = await response.json();
 
-//   return {
-//     props: {
-//       posts: { data },
-//     },
-//   };
-// };
+  return {
+    props: {
+      post: data,
+    },
+    revalidate: 5,
+  };
+};

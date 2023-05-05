@@ -4,10 +4,14 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
+import Layout from "./../../../../../Project/OutSource/nature/wp-content/plugins/elementor/app/modules/onboarding/assets/js/components/layout/layout";
+import { AdminLayout, MainLayout } from "@/components/layout";
 
 export interface PostListPageProps {
   posts: any[];
 }
+
+PostListPage.Layout = AdminLayout;
 
 export default function PostListPage({ posts }: PostListPageProps) {
   const router = useRouter();
@@ -62,21 +66,23 @@ export default function PostListPage({ posts }: PostListPageProps) {
       <Head>
         <title>This is Post Lists Page | Paul La</title>
       </Head>
-      <Header />
 
       <main className="flex flex-col items-center p-5">
         <h1> Post List Page {page}</h1>
 
         <div className="toolbar toolbar-top">
-          <div className="page flex m-4 items-end">
+          <div className="page flex m-4 items-end hidden ">
             <button onClick={handlePrevClick}>Prev</button>
             <button onClick={handleNextClick}>Next</button>
           </div>
         </div>
 
-        <ul className="grid grid-cols-4 gap-6 post-list w-full max-w-screen-xl ">
+        <ul className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 post-list w-full max-w-screen-2xl ">
           {postList.map((post: any) => (
-            <li key={post?.id} className="post w-200 h-100 p-2 border-1 border-gray-200 rounded-lg">
+            <li
+              key={post?.id}
+              className="post w-200 h-100 p-2 justify-center border-1 border-gray-200 rounded-lg"
+            >
               <h3 className="post-title text-xl font-bold">{post.title}</h3>
               <p className="flex justify-between">
                 <span className="post-author">{post.author}</span>
@@ -85,7 +91,7 @@ export default function PostListPage({ posts }: PostListPageProps) {
 
               <Link href={`posts/${post?.id}`}>
                 <img
-                  className=" w-80 h-40 flex text-center rounded-lg cursor-pointer hover:opacity-70"
+                  className=" w-80 h-40 mx-auto flex text-center rounded-lg cursor-pointer hover:opacity-70"
                   src={post.imageUrl ? post.imageUrl : "no-image"}
                   alt={post.imageUrl}
                 />
