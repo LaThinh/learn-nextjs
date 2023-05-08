@@ -60,13 +60,26 @@ export default function PostListPage({ posts }: PostListPageProps) {
     );
   }
 
+  if (router.isFallback) {
+    return (
+      <div className="post-detail-page w-full px-10">
+        <div
+          className="post-detail flex flex-col justify-center 
+        mx-auto p-5 bg-white rounded-xl max-w-screen-xl"
+        >
+          <h2>Loading ...</h2>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Head>
         <title>This is Post Lists Page | Paul La</title>
       </Head>
 
-      <main className="flex flex-col items-center p-5">
+      <main className="flex flex-col items-center p-5 ">
         <h1> Post List Page {page}</h1>
 
         <div className="toolbar toolbar-top">
@@ -76,7 +89,7 @@ export default function PostListPage({ posts }: PostListPageProps) {
           </div>
         </div>
 
-        <ul className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 post-list w-full max-w-screen-2xl ">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 post-list w-full max-w-screen-2xl ">
           {postList.map((post: any) => (
             <li
               key={post?.id}

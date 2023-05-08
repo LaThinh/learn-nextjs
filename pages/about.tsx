@@ -35,4 +35,4 @@ export default function AboutPage(props: IAboutPageProps) {
   );
 }
 
-AboutPage.Layout = AdminLayout;
+AboutPage.Layout = MainLayout;

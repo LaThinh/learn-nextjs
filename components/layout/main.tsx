@@ -11,10 +11,10 @@ export function MainLayout({ children }: LayoutProps) {
     return () => console.log("Main Layout unmounted");
   }, []);
   return (
-    <div className="flex flex-col items-center layout-main">
+    <div className="min-h-[100vh] mx-auto w-full max-w-screen-xl layout-main">
       <Header />
-      <div className="column w-full max-w-screen-xl p-5 ">
-        <div className="main-container bg-white rounded-lg min-h-[80vh]">
+      <div className="column w-full ">
+        <div className="main-container p-5 bg-white rounded-lg min-h-[80vh]">
           {children}
           <p>Main Layout</p>
         </div>

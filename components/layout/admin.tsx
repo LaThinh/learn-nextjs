@@ -10,14 +10,14 @@ export function AdminLayout({ children }: LayoutProps) {
   }, []);
 
   return (
-    <div className="layout-admin min-h-[100vh] block">
+    <div className="min-h-[100vh] mx-auto w-full max-w-screen-xl layout-admin">
       <Header />
-      <div className="columns flex w-full max-w-screen-xl mx-auto min-h-[80vh] justify-between gap-x-10 p-5 ">
+      <div className="columns flex w-full min-h-[80vh] justify-between gap-x-10">
         <div className="sidebar basis-1/5 bg-white rounded-lg p-3 border-1 border-gray-300">
           Sidebar
           <p>Admin Layout 2 columns</p>
         </div>
-        <div className="main-container basis-4/5 bg-white rounded-lg p-3 border-1 border-gray-300">
+        <div className="main-container basis-4/5 bg-white rounded-lg p-4 border-1 border-gray-300">
           {children}
         </div>
       </div>
