@@ -20,6 +20,7 @@ export default function UserPage({ users }: IUserPageProps) {
             </h3>
             <Link href="mailto:{user.email}">{user.email}</Link>
             <p>{user.phone}</p>
+            <Link href={`/users/${user.id}`}>View Detail {user.id}</Link>
           </li>
         ))}
       </ul>

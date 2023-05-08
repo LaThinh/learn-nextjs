@@ -60,19 +60,6 @@ export default function PostListPage({ posts }: PostListPageProps) {
     );
   }
 
-  if (router.isFallback) {
-    return (
-      <div className="post-detail-page w-full px-10">
-        <div
-          className="post-detail flex flex-col justify-center 
-        mx-auto p-5 bg-white rounded-xl max-w-screen-xl"
-        >
-          <h2>Loading ...</h2>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
       <Head>
