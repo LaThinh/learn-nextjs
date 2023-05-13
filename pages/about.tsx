@@ -18,6 +18,13 @@ export default function AboutPage(props: IAboutPageProps) {
   const router = useRouter();
   console.log("About query: ", router.query);
 
+  const [active, setActive] = React.useState(true);
+
+  const changeActive = () => {
+    setActive(!active);
+    //console.log(active);
+  };
+
   return (
     <>
       <Head>
@@ -30,6 +37,9 @@ export default function AboutPage(props: IAboutPageProps) {
         <Link href="https://facebook.com/lathinh" target="_blank">
           This is Facebook Link
         </Link>
+        <h3>Is Active: {active ? "true" : "false"}</h3>
+
+        <button onClick={changeActive}>Change Active</button>
       </div>
     </>
   );

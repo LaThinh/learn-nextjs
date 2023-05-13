@@ -70,13 +70,13 @@ export default function PostListPage({ posts }: PostListPageProps) {
         <h1> Post List Page {page}</h1>
 
         <div className="toolbar toolbar-top">
-          <div className="page flex m-4 items-end hidden ">
+          <div className="page flex m-4 items-end  ">
             <button onClick={handlePrevClick}>Prev</button>
             <button onClick={handleNextClick}>Next</button>
           </div>
         </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 post-list w-full max-w-screen-2xl ">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 post-list w-full max-w-screen-2xl ">
           {postList.map((post: any) => (
             <li
               key={post?.id}
@@ -90,7 +90,7 @@ export default function PostListPage({ posts }: PostListPageProps) {
 
               <Link href={`posts/${post?.id}`}>
                 <img
-                  className=" w-80 h-40 mx-auto flex text-center rounded-lg cursor-pointer hover:opacity-70"
+                  className="block w-80 h-40 mx-auto bg-gray-300 loading rounded-lg cursor-pointer hover:opacity-70"
                   src={post.imageUrl ? post.imageUrl : "no-image"}
                   alt={post.imageUrl}
                 />
@@ -113,6 +113,7 @@ export default function PostListPage({ posts }: PostListPageProps) {
 
 export async function getStaticProps() {
   console.log("Get static props");
+
   return {
     props: {},
   };
