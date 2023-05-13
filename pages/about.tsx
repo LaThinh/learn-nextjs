@@ -22,7 +22,7 @@ export default function AboutPage(props: IAboutPageProps) {
 
   const changeActive = () => {
     setActive(!active);
-    //console.log(active);
+    console.log(active);
   };
 
   return (
@@ -39,7 +39,7 @@ export default function AboutPage(props: IAboutPageProps) {
         </Link>
         <h3>Is Active: {active ? "true" : "false"}</h3>
 
-        <button onClick={changeActive}>Change Active</button>
+        <button onClick={changeActive}>Change Active </button>
       </div>
     </>
   );

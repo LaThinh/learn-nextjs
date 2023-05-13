@@ -5,7 +5,6 @@ import httpProxy from "http-proxy";
 // type Data = {
 //   name: string;
 // };
-
 export const config = {
   api: {
     bodyParser: false,
